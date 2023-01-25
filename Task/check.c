@@ -30,7 +30,14 @@ int main()
 }
 
 int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int SourceSizeMax)
-{  
+{       
+       
+       if(DestStrPtr == NULL)
+        printf("\n");
+       if(DestSizeMax == 0)
+       if(SourceStrPtr == NULL)
+       if(SourceSizeMax == 0)
+    
       /* What if
        * - DestStrPtr is NULL
        * - DestSizeMax is 0
@@ -41,7 +48,7 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
        * These error check are missning and their testcases are also missing in the main function.
        */
 
-      int flag = 0;
+//       int flag = 0;
       if(SourceSizeMax<DestSizeMax)
       {
              DestSizeMax=SourceSizeMax;
