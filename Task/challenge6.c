@@ -90,39 +90,6 @@ int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
         continue;
     }
     //-----------------------------------------------------------------------------------------------------
-    // for(index = 1; index < iLen-1; index++ )
-    // {
-    //     if(tLength > length)
-    //     {
-    //         length = tLength;
-    //         pos = index - 1 ;
-    //     }
-
-    //     tLength = 0;
-    //     count = 0;
-    //     tCount = 1;
-    //     tIndex = index;
-
-    //     do
-    //     {
-    //         count++;
-    //         if(iStrPtr[tIndex] == iStrPtr[tIndex + tCount])
-    //         {
-    //         printf("%d == %d \n",tIndex, tIndex + tCount);
-    //         tCount += 2;
-    //         tIndex--;
-    //         tLength += 2;
-
-    //         }
-    //         else
-    //         {
-    //         printf("%d != %d \n",tIndex, tIndex + tCount);
-    //         goto cntd2;
-    //         }
-    //     }while(count <= index );
-    // cntd2:   continue;
-
-    // }
 
     *ioStartIdx = pos;
     return length;
