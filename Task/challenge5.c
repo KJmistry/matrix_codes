@@ -62,7 +62,7 @@ label1:
     tLength++;
     compare++; // controlling do while for further iteration
                 /* i.e if no match found (all char is unique) say string = abcd
-                iteration1 = check 1 time b == a?
+                iteration1 = check 1 time b == a ?
                 iteration2 = check 2 time c == b ? && c == a ?
                 iteration3 = check 3 time d == c ? && d == b ? && d == a ?
                 iteration4 = check 4 time .......(ctd. if needed)
@@ -91,7 +91,7 @@ end:            //end if comparision
 
 int main()
 {
-    char iStr[] = "abcabcdef";
+    char iStr[] = "aafacytionbb";
     int iStrLen = strlen(iStr);
     int startIndex;
     int subStrLen = getLongestSubstring(iStr, iStrLen, &startIndex);

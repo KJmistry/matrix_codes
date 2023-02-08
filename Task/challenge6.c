@@ -4,6 +4,13 @@
 
 int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
 {
+    if (iStrPtr == NULL)
+    {
+        printf("NULL pointer detected \n");
+        *ioStartIdx = 0;
+        return 0;
+    }
+    
     if (ioStartIdx == NULL)
     {
         printf("NULL pointer detected \n");
@@ -11,7 +18,7 @@ int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
         return 0;
     }
 
-    int length = 0, tLength = 0, count, index = 1, compare, tPos, pos = 0, tIndex, tCount;
+    int length = 0, tLength = 0, count, index = 1, pos = 0, tIndex, tCount;
     if (iLen == 1)
     {
         length = 1;
@@ -50,7 +57,6 @@ int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
             length = tLength + 1;
             pos = tIndex - (tCount - 1);
         }
-
         continue;
     }
     //-------------------------------------------------------------------------------------------
@@ -97,7 +103,7 @@ int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
 
 int main()
 {
-    char iStr[] = "pwkkw";
+    char iStr[] = "pwkkwp";
     int iStrLen = strlen(iStr);
     int startIndex;
     int subStrLen = longestPalindrome(iStr, iStrLen, &startIndex);

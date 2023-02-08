@@ -17,14 +17,29 @@ struct node
 
 void *addNode(struct node *ptr, int value)
 {
+    if (NULL == ptr)
+    {
+        printf("NULL pointer detected \n");
+        return NULL;
+    }
     ptr->next = (struct node *)malloc(sizeof(struct node));
     ptr->data = value - '0';
     ptr->next->next = NULL;
     return ptr->next;
 }
 
-void creatlist(struct node *head, char *list, int maxLen)
+int creatlist(struct node *head, char *list, int maxLen)
 {
+    if (NULL == head)
+    {
+        printf("NULL structure pointer detected \n");
+        return 1;
+    }
+    if (NULL == list)
+    {
+        printf("NULL arry pointer detected \n");
+        return 1;
+    }
     struct node *temp;
     temp = addNode(head, list[strlen(list)-1]);
 
@@ -39,10 +54,17 @@ void creatlist(struct node *head, char *list, int maxLen)
             temp = addNode(temp, '0');
         }
     }
+    return 0;
 }
 
-void printList(struct node *ptr)
+int printList(struct node *ptr)
 {
+    if (NULL == ptr)
+    {
+        printf("NULL pointer detected \n");
+        return 1;
+    }
+
     printf("[ ");
     while (ptr->next != NULL)
     {
@@ -50,6 +72,7 @@ void printList(struct node *ptr)
         ptr = ptr->next;
     }
     printf("]\n");
+    return 0;
 }
 
 void* addTwoNumbers(struct node* iList1_Ptr, struct node* iList2_Ptr)
@@ -92,28 +115,59 @@ void freeList(struct node *ptr)
         ptr = tPtr;
     }
 }
+
 int main()
 {
 
-    char list1[] = "9999999";
+    char list1[] = "9999998";
     char list2[] = "999";
 
     struct node *head1 = (struct node *)malloc(sizeof(struct node));
     struct node *head2 = (struct node *)malloc(sizeof(struct node));
 
     struct node *ptr = NULL;
-    int maxLen = max(strlen(list1),strlen(list2));
-    creatlist(head1, list1, maxLen);
-    creatlist(head2, list2, maxLen);
+    int maxLen = max(strlen(list1),strlen(list2)),valid;
 
+    valid = creatlist(head1, list1, maxLen);
+    if( valid == 1)
+    {
+        printf("List creation failed..!\n");
+        return 1;
+    }
+
+    valid = creatlist(head2, list2, maxLen);
+    if( valid == 1)
+    {
+        printf("List creation failed..!\n");
+        return 1;
+    }
     
-    printf("List1 (Number 1):  "); printList(head1);
-    printf("List2 (Number 2):  "); printList(head2);
+    printf("List1 (Number 1):  "); valid = printList(head1);
+    if( valid == 1)
+    {
+        printf("Unable to print List ..!\n");
+        return 1;
+    }
+
+    printf("List2 (Number 2):  "); valid = printList(head2);
+    if( valid == 1)
+    {
+        printf("Unable to print List ..!\n");
+        return 1;
+    }
 
     ptr = addTwoNumbers(head1,head2);
-    printf("List3 (Addition):  "); printList(ptr);
+    printf("List3 (Addition):  "); valid = printList(ptr);
+    if( valid == 1)
+    {
+        printf("Unable to print List ..!\n");
+        return 1;
+    }
 
     freeList(head1);
+    head1 = NULL;
     freeList(head2);
+    head2 = NULL;
     freeList(ptr);
+    ptr = NULL;
 }
