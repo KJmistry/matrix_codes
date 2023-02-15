@@ -8,10 +8,10 @@ int main()
       int number;
       char string2[5];
       // const char string1[]={'a','b','c','d'};  //S<D without null
-       const char string1[]={'a','b','c','d','a','b','c','d','a','b'}; //S<D
+       //const char string1[]={'a','b','c','d','a','b','c','d','a','b'}; //S<D
 
 
-      // const char string1[]={'a','b','c','d','e','f'}; //S>D without null
+      const char string1[]={'a','b','c','d','e'}; //S>D without null
       // const char string1[]={'a','b','c','d','e','f','\0'};//S>D
 
 
@@ -21,7 +21,7 @@ int main()
       //printf("source_size = %d\n",source_len);
 
 
-      number = CopyStr((char *)string2,5,(const char *)string1,3);
+      number = CopyStr((char *)string2,5,(const char *)string1,5);
 
 
       printf("Destination string after calling CopyStr: %s\n",string2);
@@ -33,11 +33,25 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
 {       
        
        if(DestStrPtr == NULL)
-        printf("\n");
+       {
+        printf("Destination pointer is NULL\n");
+        return 0;
+       }
        if(DestSizeMax == 0)
+       {
+        printf("Invalid Destination size\n");
+        return 0;
+       }
        if(SourceStrPtr == NULL)
+       {
+        printf("Destination pointer is NULL\n");
+        return 0;
+       }
        if(SourceSizeMax == 0)
-    
+       {
+        printf("Invalid source size\n");
+        return 0;
+       }
       /* What if
        * - DestStrPtr is NULL
        * - DestSizeMax is 0
@@ -47,8 +61,8 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
        *
        * These error check are missning and their testcases are also missing in the main function.
        */
-
-//       int flag = 0;
+      int count=0;
+      int flag = 0;
       if(SourceSizeMax<DestSizeMax)
       {
              DestSizeMax=SourceSizeMax;
@@ -58,7 +72,7 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
               * and then you are doing
               * DestStrPtr[10+1]='\0'; which leads to array index out of bound and may crash the program.
               */
-               DestStrPtr[DestSizeMax]='\0';
+              DestStrPtr[DestSizeMax]='\0';
              /* Here (SourceSizeMax) size of SourceStrPtr is passed, not the length of that string
               * So the SourceStrPtr may have characters < its size
               * So, even if ignoring the indices of the statement, it is wrong. DestStrPtr[DestSizeMax+1]='\0';
@@ -66,7 +80,6 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
              flag = 1;
       }
 
-      int count=0;
 
       for(int dest_index=0; dest_index < DestSizeMax; dest_index++)
       {
@@ -76,11 +89,17 @@ int CopyStr(char *DestStrPtr, int DestSizeMax, const char *SourceStrPtr, int Sou
              DestStrPtr[dest_index] = SourceStrPtr[dest_index];
              //printf("%c\n",SourceStrPtr[dest_index]);
              count++;
+             if(SourceStrPtr[dest_index] == '\0')
+             {       
+                     flag=1;
+                     break;
+             }
       }
 
       if(flag == 0)
       {
                DestStrPtr[DestSizeMax-1]='\0';
+               count--;
       }
 
       /* '\0' character is also counted here.

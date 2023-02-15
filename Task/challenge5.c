@@ -91,7 +91,7 @@ end:            //end if comparision
 
 int main()
 {
-    char iStr[] = "aafacytionbb";
+    char iStr[] = "mmmzzzasdefglll";
     int iStrLen = strlen(iStr);
     int startIndex;
     int subStrLen = getLongestSubstring(iStr, iStrLen, &startIndex);

@@ -30,8 +30,6 @@ int rotatedSort(int *ioData, int iSize, int poz)
             }
         }
         rtdArr[iSize - rotIndex] = ioData[arrIndex1];
-        // printf("%d--\n",(iSize - rotIndex));
-        // printf("%d\n",ioData[arrIndex1]);
 
         if (rotIndex == 1)
             rotIndex = iSize + 1;

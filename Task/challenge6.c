@@ -103,7 +103,7 @@ int longestPalindrome(const char *iStrPtr, int iLen, int *ioStartIdx)
 
 int main()
 {
-    char iStr[] = "pwkkwp";
+    char iStr[] = "fffpwkkwpooo";
     int iStrLen = strlen(iStr);
     int startIndex;
     int subStrLen = longestPalindrome(iStr, iStrLen, &startIndex);

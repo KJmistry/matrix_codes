@@ -6,9 +6,9 @@ int string_length(char *);
 int main()
 {   
     int length;
-    char string[5]="123456666";
+    char string[]="123456666";
     //string[6]='d';
-    // string[8]='d';
+    string[9]='d';
     
     char *ptr = string;
     //printf("%d",BUFFER_SIZE);

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <math.h>
 int calc(char,int);
-void rearrange(int*,char*,int);
+int rearrange(int*,char*,int,int);
 int arr[100];
 int main()
 {
@@ -52,8 +52,8 @@ int main()
        {
            if(opr[i]=='*'||opr[i]=='/')
            {
-
-            rearrange(arr,opr,i);
+            printf("%d(o)index\n",index);
+            int new_index = rearrange(arr,opr,i,index);
             //    ans=calc(opr[i],i);
             //    if(i==c+1)
             //    {
@@ -62,8 +62,11 @@ int main()
             //    }
             //    printf("--%d\n",ans);
             //    c=i;
+            index = new_index;
+            printf("%d(n)index\n",new_index);
            }
        }
+
        for(int i=0;i<index-1;i++)
        {
            if(opr[i]=='+'||opr[i]=='-')
@@ -104,20 +107,23 @@ int calc(char opr,int i)
              //printf("mul\n");
              break;
        }
-   //arr[i]=ans;
-   //arr[i+1]=ans;
+   arr[i]=ans;
+   arr[i+1]=ans;
    return ans;
 }
 
-void rearrange(int arr[],char opr[],int m)
+int rearrange(int arr[],char opr[],int m,int old_index)
 {
         arr[m]=calc(opr[m],m);
-        for(int i=m+1;i<index-1;i++)
+        opr[m]=opr[m+1];
+        for(int i=0;i<old_index-1;i++)
+       {
+        if(i>m)
         {
-            arr[i]=arr[i+2];
-        }
-        for(int i=m;i<index-1;i++)
-        {
+            arr[i]=arr[i+1];
             opr[i]=opr[i+1];
-        }
+        }    
+       }
+       return old_index-1;
+        // printf("%d-----\n",calc(opr[m],m));       
 }
