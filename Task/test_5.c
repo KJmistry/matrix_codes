@@ -298,7 +298,7 @@ int defaultRecord(struct DKP_Parameters *ptr)
     return 0;
 }
 
-int updateRecord(int recIndex, struct )
+int updateRecord(int recIndex)
 {
 //----------------------remaining-------------------------
 };
