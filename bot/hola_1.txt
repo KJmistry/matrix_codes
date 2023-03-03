@@ -1,0 +1,37 @@
+intro -------------------------------------
+
+
+HolA bot : Holonomic Art Bot (Holonimoc Drive Bot and Art !)
+
+unlike the usual, more popular differential drive robots, the Holonimoc drive robots can control all the three degrees of freedom possible on a plane (2D).
+[ translation along x & y axis and rotation along z axis (i.e yaw movement)]
+
+image : ---- 3D moves + bot architecture ! 
+
+This gives the robot the ability to make art that would otherwise not be possible with the usual two wheeled differential drive robots.
+
+Objective ----------------------------------
+
+
+Will be deploying the HolA bot in an arena(8 x 8 Feet approx) for performing the desired art work (drawing objects).  
+
+(relate the reason : why performing art activity : can have better visulisation about the bot movemtnts with its trace and also easy to identify the accuracy...
+drawing any art with the bot/machine is the case where maximum possible accuracy is required !! the other applications that we are currently thinking of may not
+necessarily req such accuracy !)
+
+Working ----------------------------
+
+Block Diagram ----- img 
+
+
+
+
+
+
+
+
+
+
+
+
+
