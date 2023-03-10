@@ -70,7 +70,7 @@ after installation source colcon-argcomplete.bash script to .bashrc file  (/usr/
     colcon build
     ls
     // will get output of ls command as following 
-    // build install log src (3 new folders added !)
+    // build install log src (3 new folders added along with src !)
 
 build will fetch codes inside src filder that we have created already and build them and as a outcome will get three new folders. It will build first and install nodes inside install folder.
 
@@ -94,4 +94,76 @@ first go to src directory of ros2_ws
 
 after complition will use ls command inside src folder. will find one folder named my_robot_controller. hit code . and open src folder in VS code. 
 
-inside my_robot_controller will find: __my_robot_controller__ __resource__ __test__ 
+inside my_robot_controller will find: __my_robot_controller__ , __resource__ , __test__ directories and __package.xml__ , __setup.cfg__ , __setup.py__
+
+- package.xml : Info/Dependency/build_type etc.
+- setup.cfg : path - install ros2 node (No need to change)
+- steup.py : similar info like package.xml 
+
+One Sub Directory will be having the same name as the package name (__my_robot_controller__ in our case), inside this folder will be creating our ros2 nodes.
+
+go back to ros2_ws directory (current directory: ros2_ws/src/my_robot_controller ) and hit colcon build comand 
+
+    cd ../.. 
+    colcon build
+
+if error occures change change setuptool version
+
+every thing inside package is considered to be build after getting success message. Build will install every thing we want to install in our package inside install folder. from install folder we will be able to run our nodes.(ros2 run [node name])
+
+## Writing the first Node (Hello world)
+
+inside my_robot_controller (ros2_ws/src/my_robot_controller/my_robot_controller) initially will find __init__.py file. creat another python file (executable) for your node inside the same folder(my_first_node.py in our case).
+
+python script for Node:
+
+``` python
+#! /usr/bin/env python3     
+#interpreter line to tell interpreter to use python3 
+
+import rclpy       # python lib for ros2
+
+from rclpy.node import Node
+
+class MyNode(Node):                                     # creating Node using OOP (defining class myNode inherit from Node(rclpy.node))
+
+    def __init__(self):                                 # constructor (self will get functionality of Node class) 
+        super().__init__("first_node")                  # calling constructor of upper class, providing Node name that will be using to run Node in the graph 
+                                                        # first_node in current code
+
+        self.get_logger().info("Hello from ROS2")       # print
+ 
+
+def main(args = None):
+    rclpy.init(args=args)                               # intit ros2 communications
+    node = MyNode()                                     # Creating Node object inside main
+    rclpy.spin(node)                                    # continuously running Node (kill using Ctrl+C)
+    rclpy.shutdown()                                    # shutdown ros2 comm.  
+
+if __name__ == '__main__':                              #useful when directly running file from terminal
+    main()
+
+```
+after writing Node, from terminal execute ./file Name 
+
+Now to run Node using ros2 run [Node Name]: goto setup inside my_robot_controller and add it to console scripts as shown below !
+
+``` python
+entry_points={
+        'console_scripts': [
+            "test_node = my_robot_controller.my_first_node:main "
+```
+
+save it and execute concon build command inside ros2_ws folder.
+after successful build again source bashrc file to use new functionalities we have added.
+
+finally execute ros2 run
+
+    ros2 run my_robot_controller test_node 
+
+[Be careful about three names related to nodes: python file name , node name , ros2 executable name ] // use a common name for future Nodes!
+
+use symlink-install for executing modified Node without building it everytime after small changes in a program.
+
+## Using ros2 timer and callbacks !
+
